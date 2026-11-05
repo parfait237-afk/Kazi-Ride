@@ -1,0 +1,55 @@
+{
+  "expo": {
+    "name": "KaziRide",
+    "slug": "kazi-Ride",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/kaziride-icon.png",
+    "scheme": "kaziride",
+    "userInterfaceStyle": "automatic",
+    "ios": {
+      "icon": "./assets/images/kaziride-icon.png"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#001B4E",
+        "foregroundImage": "./assets/images/kaziride-adaptive-icon.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "output": "server",
+      "favicon": "./assets/images/kaziride-favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-router",
+        {
+          "apiRoutes": true
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Autorisez KaziRide à utiliser votre position pour définir automatiquement votre point de départ."
+        }
+      ],
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#001B4E",
+          "image": "./assets/images/kaziride-splash-logo.png",
+          "imageWidth": 220,
+          "dark": {
+            "backgroundColor": "#001B4E",
+            "image": "./assets/images/kaziride-splash-logo.png"
+          }
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true,
+      "reactCompiler": true
+    }
+  }
+}

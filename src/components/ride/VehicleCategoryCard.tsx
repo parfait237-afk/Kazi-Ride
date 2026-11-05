@@ -1,0 +1,17 @@
+import { Check, Crown, Leaf, UserRound, UsersRound } from 'lucide-react-native';
+import { Image, Pressable, StyleSheet, View, type ImageSourcePropType } from 'react-native';
+import { AppText } from '@/components/ui';
+import { colors } from '@/theme';
+import type { RideCategoryQuote } from '@/types/ride.types';
+const images: Record<RideCategoryQuote['code'], ImageSourcePropType> = { ECO: require('@/assets/images/vehicle-yaris.png'), COMFORT: require('@/assets/images/vehicle-corolla.png'), VAN: require('@/assets/images/vehicle-hiace.png') };
+const accents = { ECO: '#16A34A', COMFORT: '#F5A400', VAN: colors.electricBlue } as const;
+export function VehicleCategoryCard({ quote, selected, onPress }: { quote: RideCategoryQuote; selected: boolean; onPress: () => void }) {
+  const AccentIcon = quote.code === 'ECO' ? Leaf : quote.code === 'COMFORT' ? Crown : UsersRound;
+  return <Pressable disabled={!quote.available} onPress={onPress} style={({ pressed }) => [styles.card, selected && styles.selected, !quote.available && styles.disabled, pressed && styles.pressed]}>
+    <Image source={images[quote.code]} resizeMode="contain" style={styles.vehicle} />
+    <View style={styles.copy}><View style={styles.titleRow}><AppText style={styles.title}>{quote.name}</AppText><AccentIcon size={20} color={accents[quote.code]} strokeWidth={2.5} /></View><AppText numberOfLines={1} style={styles.description}>{quote.description}</AppText><View style={styles.capacity}><UserRound size={16} color="#50637F" fill="#50637F" /><AppText style={styles.capacityText}>{quote.minPassengers}–{quote.maxPassengers} passagers</AppText></View></View>
+    <View style={styles.separator} /><View style={styles.priceBlock}><AppText numberOfLines={1} adjustsFontSizeToFit style={styles.price}>{new Intl.NumberFormat('fr-FR').format(quote.price)} FCFA</AppText><AppText style={styles.eta}>Trajet ≈ {quote.tripDurationMinutes} min</AppText></View>
+    {selected && <View style={styles.check}><Check size={20} color="#fff" strokeWidth={3} /></View>}
+  </Pressable>;
+}
+const styles = StyleSheet.create({ card: { minHeight: 112, borderRadius: 24, borderWidth: 1, borderColor: '#E1E9F3', backgroundColor: '#fff', flexDirection: 'row', alignItems: 'center', paddingHorizontal: 12, paddingVertical: 10, shadowColor: '#001B4E', shadowOpacity: .08, shadowRadius: 12, shadowOffset: { width: 0, height: 5 }, elevation: 3 }, selected: { borderWidth: 2, borderColor: colors.electricBlue, backgroundColor: '#EFF7FF' }, disabled: { opacity: .46 }, pressed: { transform: [{ scale: .988 }] }, vehicle: { width: 112, height: 76, marginRight: 5 }, copy: { flex: 1, minWidth: 96 }, titleRow: { flexDirection: 'row', alignItems: 'center', gap: 6 }, title: { color: colors.navy, fontSize: 20, fontWeight: '900' }, description: { color: '#50637F', fontSize: 13, marginTop: 3 }, capacity: { flexDirection: 'row', alignItems: 'center', gap: 5, marginTop: 7 }, capacityText: { color: '#50637F', fontSize: 13, fontWeight: '600' }, separator: { width: 1, height: 66, backgroundColor: '#D8E2EE', marginHorizontal: 10 }, priceBlock: { width: 102, alignItems: 'flex-end' }, price: { color: colors.navy, fontSize: 17, fontWeight: '900' }, eta: { color: '#50637F', fontSize: 10, lineHeight: 14, textAlign: 'right', marginTop: 7 }, check: { position: 'absolute', right: -1, top: -10, width: 34, height: 34, borderRadius: 17, backgroundColor: colors.electricBlue, alignItems: 'center', justifyContent: 'center' } });
