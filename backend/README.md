@@ -47,6 +47,37 @@ npm audit --omit=dev
 
 Les tests en ligne nécessitant Neon et Resend doivent être exécutés après configuration du fichier `.env` avec des identifiants de test.
 
+## Déploiement sur Vercel
+
+Le backend utilise l'entrée Express `index.ts`, exportée comme fonction Vercel, tandis que `src/server.ts` conserve le serveur local avec `app.listen()`.
+
+Dans les paramètres du projet Vercel :
+
+1. Définir **Root Directory** sur `backend`.
+2. Utiliser la détection automatique ou le preset **Other**.
+3. Laisser **Build Command**, **Install Command** et **Output Directory** sans surcharge personnalisée.
+4. Ajouter les variables suivantes dans Production, Preview et Development :
+
+   - `NODE_ENV=production`
+   - `DATABASE_URL`
+   - `RESEND_API_KEY`
+   - `EMAIL_FROM`
+   - `JWT_ACCESS_SECRET`
+   - `OTP_HMAC_SECRET`
+   - `EMAIL_MODE`
+   - `TEST_ALLOWED_EMAIL` lorsque `EMAIL_MODE=resend-test`
+   - `GOOGLE_MAPS_SERVER_API_KEY` si Google Routes/Places est utilisé
+   - `GEOAPIFY_API_KEY` ou `OSRM_BASE_URL` selon la configuration cartographique
+
+Après le déploiement, vérifier les deux routes publiques :
+
+```text
+GET https://votre-projet.vercel.app/
+GET https://votre-projet.vercel.app/health
+```
+
+Elles doivent retourner un JSON contenant `"status": "ok"`.
+
 ## Resend en mode bêta
 
 Configurer dans `.env` :

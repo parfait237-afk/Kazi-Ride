@@ -48,7 +48,8 @@
     "typescript": "~6.0.3"
   },
   "scripts": {
-    "start": "expo start --lan --clear --port 8083",
+    "start": "node ./scripts/start-kaziride.mjs",
+    "start:mobile": "expo start --lan --clear --port 8083",
     "dev": "npm --prefix backend run dev",
     "db:migrate": "npm --prefix backend run db:migrate",
     "db:generate": "npm --prefix backend run db:generate",
