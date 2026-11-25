@@ -55,8 +55,9 @@ Dans les paramètres du projet Vercel :
 
 1. Définir **Root Directory** sur `backend`.
 2. Utiliser la détection automatique ou le preset **Other**.
-3. Laisser **Build Command**, **Install Command** et **Output Directory** sans surcharge personnalisée.
-4. Ajouter les variables suivantes dans Production, Preview et Development :
+3. Sélectionner **Node.js 22.x** dans les réglages de build. Le fichier `package.json` impose également cette version.
+4. Laisser **Build Command**, **Install Command** et **Output Directory** sans surcharge personnalisée.
+5. Ajouter les variables suivantes dans Production, Preview et Development :
 
    - `NODE_ENV=production`
    - `DATABASE_URL`
