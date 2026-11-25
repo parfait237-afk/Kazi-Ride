@@ -49,7 +49,7 @@ Les tests en ligne nécessitant Neon et Resend doivent être exécutés après c
 
 ## Déploiement sur Vercel
 
-Le backend utilise l'entrée Express `index.ts`, exportée comme fonction Vercel, tandis que `src/server.ts` conserve le serveur local avec `app.listen()`.
+Le backend utilise l'entrée Express `api/index.ts`, exportée comme fonction Node.js Vercel, tandis que `src/server.ts` conserve le serveur local avec `app.listen()`. Le fichier `vercel.json` route `/`, `/health` et `/api/*` vers cette fonction.
 
 Dans les paramètres du projet Vercel :
 
